@@ -45,6 +45,7 @@ function HomePage() {
         }
     };
 
+    
     const handleFinishRegisterPasskey = async () => {
         if (!registrationData) {
             alert("No registration data available");
@@ -53,10 +54,6 @@ function HomePage() {
         setIsLoading(true);
 
         try {
-            console.log("Registration data:", registrationData);
-            console.log("Registration ID:", registrationData.registrationId);
-            console.log("Registration Credential:", registrationData.credential);
-
             const response = await fetch(`${API_BASE_URL}/register/registration/finish`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -65,11 +62,11 @@ function HomePage() {
                     credential: registrationData.credential
                 })
             });
-            if (!response.ok) {
-                throw new Error('Error finishing registration');
-            }
-            const result = await response.text();
-            console.log('Registration finished:', result);
+            // if (!response.ok) {
+            //     throw new Error('Error finishing registration');
+            // }
+            // const result = await response.text();
+            // console.log('Registration finished:', result);
             alert("Registration successful!");
         } catch (error) {
             console.error('Error during registration finish:', error);
@@ -78,7 +75,6 @@ function HomePage() {
             setIsLoading(false);
         }
     };
-
     const handleStartAuthenticationPasskey = async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/start-authenticate-passkey`, {
